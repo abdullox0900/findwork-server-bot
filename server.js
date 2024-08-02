@@ -19,8 +19,8 @@ const formatMessage = (data) => {
   return `
     *Yangi Ma'lumotlar*
     ID: ${data.id}
-    Nomi: ${data.name}
-    Ta'rif: ${data.description}
+    Nomi: ${data.title}
+    Ta'rif: ${data.phone}
   `;
 };
 
@@ -29,7 +29,7 @@ const checkForUpdates = async () => {
   try {
     // API-dan ma'lumotlarni olish
     const response = await axios.get(API_URL);
-    const data = response.data;
+    const data = response.data.data;
 
     // Birinchi ma'lumotni tekshirish
     if (data && data.length > 0) {
@@ -53,7 +53,7 @@ const checkForUpdates = async () => {
 setInterval(checkForUpdates, CHECK_INTERVAL);
 
 // Express serverni ishga tushirish (ixtiyoriy)
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Server ${PORT} portida ishlayapti`);
 });

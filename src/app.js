@@ -17,13 +17,17 @@ const checkForUpdates = async () => {
       const firstData = data[0];
       imageGeneration(firstData.sub_category);
       
+
+      
       if (firstData.id !== lastDataId) {
         const message = formatMessage(firstData);
-        
+
         if (imageUrl) {
+          console.log(CHANNEL_ID);
+          
           await bot.sendPhoto(CHANNEL_ID, imageUrl, {
             caption: message,
-            parse_mode: 'Markdown'
+            parse_mode: 'MarkdownV2'
           });
         } else {
           await bot.sendMessage(CHANNEL_ID, message, { parse_mode: "Markdown" });
@@ -33,7 +37,7 @@ const checkForUpdates = async () => {
       }
     }
   } catch (error) {
-    console.error("Xatolik yuz berdi:", error);
+    console.error("Xatolik yuz berdi: app.js", );
   }
 };
 

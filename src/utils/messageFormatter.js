@@ -1,7 +1,7 @@
 const formatMessage = (data) => {
     return `
   📝 *Vazifa nomi*: ${data.title}
-  📄 *Tavsif*: ${data.body.slice(0, 30)}
+  📄 *Tavsif*: 
   📍 *Shahar va Manzil*: ${data.regions[0].name}
   [🔗 *Vazifa uchun havola*](http://localhost:3000/ru/vacancies/${data.id})
   [📱 *Ilovaga havola*](https://unsplash.com/photos/black-and-white-smartphone-screen-NHhxAv5zVz4)

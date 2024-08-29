@@ -15,10 +15,8 @@ const checkForUpdates = async () => {
     
     if (data && data.length > 0) {
       const firstData = data[0];
-      imageGeneration(firstData.sub_category);
-      
-
-      
+      imageGeneration(firstData.sub_category, firstData.salary_from_uzs, firstData.salary_to_uzs);
+           
       if (firstData.id !== lastDataId) {
         const message = formatMessage(firstData);
 

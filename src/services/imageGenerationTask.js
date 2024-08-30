@@ -9,7 +9,7 @@ const fontPath = './public/fonts/Inter_28pt-Bold.ttf'
 registerFont(fontPath, { family: 'Inter' });
 
 
-function imageGeneration(categoryTitle, price_from = 0, price_to = 0) {
+function imageGenerationTask(categoryTitle, price_from = 0, price_to = 0) {
     
     loadImage(imagePath).then((image) => {
         const canvas = createCanvas(image.width, image.height)
@@ -20,7 +20,7 @@ function imageGeneration(categoryTitle, price_from = 0, price_to = 0) {
 
         ctx.fillStyle = '#909ECA' 
         ctx.font = `regular 90px Arial` 
-        ctx.fillText(`Ish o‘rin / ${detectLanguage(categoryTitle)}`, 100, 500) 
+        ctx.fillText(`Topshiriq / ${detectLanguage(categoryTitle)}`, 100, 500) 
     
         ctx.fillStyle = 'white'
         ctx.font = 'bold 180px Inter'
@@ -33,7 +33,7 @@ function imageGeneration(categoryTitle, price_from = 0, price_to = 0) {
 
         ctx.fillStyle = '#909ECA'
         ctx.font = 'medium 120px Arial' 
-        ctx.fillText(`${price_from && price_to == null ? 'Kelishgan holda' : `${formatPriceUZS(price_from)}dan - ${formatPriceUZS(price_to)}gacha som`}`, 100, 1250) 
+        ctx.fillText(`${price_from && price_to == null ? 'Kelishgan holda' : `${formatPriceUZS(price_from)}dan ${formatPriceUZS(price_to)}gacha som`}`, 100, 1250) 
     
         const buffer = canvas.toBuffer('image/jpeg')
     
@@ -41,4 +41,4 @@ function imageGeneration(categoryTitle, price_from = 0, price_to = 0) {
     });
 }
 
-module.exports = imageGeneration
+module.exports = imageGenerationTask

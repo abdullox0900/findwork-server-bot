@@ -1,44 +1,17 @@
 const express = require('express');
-const { CHECK_INTERVAL, CHANNEL_ID } = require('./config/constants');
-const bot = require('./services/telegramBot');
-const { fetchData } = require('./services/apiService');
-const imageGeneration = require('./services/imageGeneration');
-const { formatMessage } = require('./utils/messageFormatter');
+const cors = require('cors');
+const vacanciesRoute = require('./routes/apiVacancies');
+const taskRoute = require('./routes/apiTask');
+const adsRoute = require('./routes/apiAds');
 
 const app = express();
-let lastDataId = null;
 
-const checkForUpdates = async () => {
-  try {
-    const data = await fetchData();
-    const imageUrl = './public/resultImg.jpg';
-    
-    if (data && data.length > 0) {
-      const firstData = data[0];
-      imageGeneration(firstData.sub_category, firstData.salary_from_uzs, firstData.salary_to_uzs);
-           
-      if (firstData.id !== lastDataId) {
-        const message = formatMessage(firstData);
+app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-        if (imageUrl) {
-          console.log(CHANNEL_ID);
-          
-          await bot.sendPhoto(CHANNEL_ID, imageUrl, {
-            caption: message,
-            parse_mode: 'MarkdownV2'
-          });
-        } else {
-          await bot.sendMessage(CHANNEL_ID, message, { parse_mode: "Markdown" });
-        }
-        
-        lastDataId = firstData.id;
-      }
-    }
-  } catch (error) {
-    console.error("Xatolik yuz berdi: app.js", );
-  }
-};
-
-setInterval(checkForUpdates, CHECK_INTERVAL);
+app.use('/api', vacanciesRoute);
+app.use('/api', taskRoute);
+app.use('/api', adsRoute);
 
 module.exports = app;

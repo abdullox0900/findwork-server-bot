@@ -1,11 +1,11 @@
 const express = require('express');
-const router = express.Router();
+const VacancyRouter = express.Router();
 const { processApiData } = require('../controllers/vacanciesController');
 
-router.post('/sendVacancies', async (req, res) => {
+VacancyRouter.post('/sendVacancy', async (req, res) => {
     try {
 
-      const data = await processApiData(req.body);
+      const data = await processApiData(JSON.parse(req.body.data));
   
       console.log(data);      
 
@@ -16,4 +16,4 @@ router.post('/sendVacancies', async (req, res) => {
     }
   });
   
-  module.exports = router;
+  module.exports = VacancyRouter;

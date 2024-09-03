@@ -1,13 +1,14 @@
 const express = require('express');
-const router = express.Router();
+const TaskRouter = express.Router();
 const { processApiData } = require('../controllers/taskController');
 
-router.post('/sendTask', async (req, res) => {
+TaskRouter.post('/sendTask', async (req, res) => {
     try {
 
-      const data = await processApiData(req.body);
-  
+      const data = await processApiData(JSON.parse(req.body.data));
+      
       console.log(data);
+      
 
       res.status(200).json({ success: true, message: 'Ma\'lumot muvaffaqiyatli yuborildi' });
     } catch (error) {
@@ -16,4 +17,4 @@ router.post('/sendTask', async (req, res) => {
     }
   });
   
-  module.exports = router;
+  module.exports = TaskRouter;

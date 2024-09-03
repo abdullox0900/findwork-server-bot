@@ -1,11 +1,11 @@
 const express = require('express');
-const router = express.Router();
+const AdRouter = express.Router();
 const { processApiData } = require('../controllers/adsController');
 
-router.post('/sendAds', async (req, res) => {
+AdRouter.post('/sendAd', async (req, res) => {
     try {
 
-      const data = await processApiData(req.body);
+      const data = await processApiData(JSON.parse(req.body.data));
   
       console.log(data);
 
@@ -16,4 +16,4 @@ router.post('/sendAds', async (req, res) => {
     }
   });
   
-  module.exports = router;
+  module.exports = AdRouter;
